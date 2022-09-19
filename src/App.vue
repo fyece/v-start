@@ -5,14 +5,14 @@ import SideNav from "./components/SideNav.vue";
 
 <template>
   <div class="min-h-screen bg-neutral-900 text-white">
-    <div class="px-2 xl:px-6">
+    <div class="px-2 pb-16 xl:px-6">
       <div class="grid gap-8">
         <TopBar />
-        <div class="grid grid-cols-12">
-          <div class="col-span-2">
+        <div class="flex lg:grid lg:grid-cols-12">
+          <div class="hidden lg:block lg:col-span-2">
             <SideNav />
           </div>
-          <div class="col-span-10">
+          <div class="w-full lg:col-span-10 bg-slate-500">
             <RouterView />
           </div>
         </div>
