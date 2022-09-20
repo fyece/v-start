@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import type { Platform } from "@/types/game";
+import type { PlatformInfo } from "@/types/game";
 
 interface Props {
   name: string;
   slug: string;
   image: string;
   metacritic: number;
-  platforms: Platform[];
+  platforms: PlatformInfo[];
 }
 
 const props = defineProps<Props>();
 </script>
 <template>
   <RouterLink to="/games123">
-    <div class="max-w-md md:max-w-sm rounded-xl bg-neutral-800 overflow-hidden">
+    <div
+      class="max-w-md h-full md:max-w-sm rounded-xl bg-neutral-800 overflow-hidden"
+    >
       <div class="h-56">
         <img
           :src="props.image"
@@ -24,9 +26,26 @@ const props = defineProps<Props>();
       <div class="p-4 md:p-4 space-y-3 h-fit min-h-36">
         <h4 class="text-xl font-semibold">{{ props.name }}</h4>
         <div class="flex h-fit justify-between items-center">
-          <div class="flex space-x-1">platforms</div>
+          <div class="flex space-x-1">
+            {{ props.platforms.map((p) => `${p.platform.name}`) }}
+          </div>
           <span
-            class="block p-1 text-green-400 border border-green-400 w-7 h-7 text-center text-sm rounded"
+            v-if="props.metacritic"
+            class="block p-1 border w-7 h-7 text-center text-sm font-medium rounded"
+            :class="{
+              'text-red-400': props.metacritic <= 50,
+              'border-red-400': props.metacritic <= 50,
+              'text-orange-400':
+                props.metacritic >= 60 && props.metacritic < 70,
+              'border-orange-400':
+                props.metacritic >= 60 && props.metacritic < 70,
+              'text-yellow-400':
+                props.metacritic >= 70 && props.metacritic < 80,
+              'border-yellow-400':
+                props.metacritic >= 70 && props.metacritic < 80,
+              'text-green-400': props.metacritic >= 80,
+              'border-green-400': props.metacritic >= 80,
+            }"
             >{{ props.metacritic }}</span
           >
         </div>

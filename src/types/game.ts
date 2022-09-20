@@ -4,6 +4,14 @@ export interface Platform {
   slug: string;
 }
 
+export interface PlatformInfo {
+  platform: Platform;
+  released_at: string;
+  requirements_en: {
+    minimum: string;
+  };
+}
+
 export interface GamesDto {
   count: number;
   next: string;
@@ -26,5 +34,5 @@ export interface Game {
   tba: boolean;
   background_image: string;
   metacritic: number;
-  platforms: Platform[];
+  platforms: PlatformInfo[];
 }

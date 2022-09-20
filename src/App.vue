@@ -5,7 +5,7 @@ import SideNav from "./components/SideNav.vue";
 
 <template>
   <div class="min-h-screen bg-neutral-900 text-white">
-    <div class="px-2 pb-16 xl:px-6">
+    <div class="px-2 md:px-8 pb-16 xl:px-6">
       <div class="grid gap-8">
         <TopBar />
         <div class="flex lg:grid lg:grid-cols-12">

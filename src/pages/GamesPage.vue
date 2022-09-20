@@ -23,7 +23,7 @@ onMounted(() => {
 onMounted(() => store.fetchGames());
 </script>
 <template>
-  <h1 class="font-semibold text-4xl mb-8 md:text-6xl md:mb-12">All games</h1>
+  <h1 class="font-bold text-4xl mb-8 md:text-7xl md:mb-12">All games</h1>
   <div class="grid md:grid-cols-3 xl:grid-cols-4 gap-3 justify-center">
     <GameCard
       v-for="game in games"
