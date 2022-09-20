@@ -21,7 +21,7 @@ const props = defineProps<Props>();
           class="block object-cover h-56 w-full"
         />
       </div>
-      <div class="p-4 md:p-2 space-y-3 h-28">
+      <div class="p-4 md:p-4 space-y-3 h-fit min-h-36">
         <h4 class="text-xl font-semibold">{{ props.name }}</h4>
         <div class="flex h-fit justify-between items-center">
           <div class="flex space-x-1">platforms</div>

@@ -7,9 +7,23 @@ const store = useGamesStore();
 const games = computed(() => {
   return store.games;
 });
+const next = computed(() => {
+  return store.nextPage;
+});
 
 onMounted(() => {
-  store.fetchGames();
+  if (store.games.length === 0) {
+    store.fetchGames();
+  } else {
+    window.onscroll = () => {
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        store.fetchNext(next.value);
+      }
+    };
+  }
 });
 
 onMounted(() => store.fetchGames());
