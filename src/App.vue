@@ -12,7 +12,7 @@ import SideNav from "./components/SideNav.vue";
           <div class="hidden lg:block lg:col-span-2">
             <SideNav />
           </div>
-          <div class="w-full lg:col-span-10 bg-slate-500">
+          <div class="w-full lg:col-span-10">
             <RouterView />
           </div>
         </div>

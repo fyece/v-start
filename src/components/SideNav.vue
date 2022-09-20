@@ -84,7 +84,7 @@ const sections: MenuSection[] = reactive([
 ]);
 </script>
 <template>
-  <aside>
+  <aside class="">
     <nav>
       <ul class="space-y-6">
         <li

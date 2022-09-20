@@ -9,6 +9,13 @@ export interface GamesDto {
   next: string;
   previous: string;
   results: Game[];
+  seo_title: string;
+  seo_description: string;
+  seo_keywords: string;
+  seo_h1: string;
+  noindex: boolean;
+  nofollow: boolean;
+  description: string;
 }
 
 export interface Game {
@@ -16,7 +23,8 @@ export interface Game {
   slug: string;
   name: string;
   released: string;
-  image: string;
+  tba: boolean;
+  background_image: string;
   metacritic: number;
   platforms: Platform[];
 }
