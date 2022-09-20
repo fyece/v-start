@@ -2,6 +2,7 @@
 import { useGamesStore } from "@/stores/games.store";
 import { computed, onMounted } from "vue";
 import GameCard from "../components/GameCard.vue";
+import { onWindowBottom } from "../utils";
 
 const store = useGamesStore();
 const games = computed(() => {
@@ -15,14 +16,7 @@ onMounted(() => {
   if (store.games.length === 0) {
     store.fetchGames();
   } else {
-    window.onscroll = () => {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
-      if (bottomOfWindow) {
-        store.fetchNext(next.value);
-      }
-    };
+    onWindowBottom(() => store.fetchNext(next.value));
   }
 });
 
