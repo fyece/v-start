@@ -16,18 +16,22 @@ const props = defineProps<Props>();
     <div
       class="max-w-md h-full md:max-w-sm rounded-xl bg-neutral-800 overflow-hidden"
     >
-      <div class="h-56">
+      <div class="h-56 flex items-center justify-center">
+        <span v-if="!props.image" class="block text-center text-neutral-600"
+          >No image</span
+        >
         <img
           :src="props.image"
           :alt="props.name"
+          v-if="props.image"
           class="block object-cover h-56 w-full"
         />
       </div>
       <div class="p-4 md:p-4 space-y-3 h-fit min-h-36">
         <h4 class="text-xl font-semibold">{{ props.name }}</h4>
-        <div class="flex h-fit justify-between items-center">
+        <div class="flex h-fit gap-2 justify-between items-center">
           <div class="flex space-x-1">
-            {{ props.platforms.map((p) => `${p.platform.name}`) }}
+            {{ props.platforms.map((p) => `${p.platform.name}`).join(", ") }}
           </div>
           <span
             v-if="props.metacritic"

@@ -9,11 +9,18 @@ export const useGamesStore = defineStore("games", () => {
   const games = ref<Game[]>([]);
   const nextPage = ref("");
 
-  async function fetchGames(page: number = 1, page_size = 36) {
+  async function fetchGames(
+    options = { page: 1, page_size: 36, ordering: "-added" }
+  ) {
     try {
       await axios
         .get<GamesDto>(baseUrl, {
-          params: { key: apiKey, page, page_size },
+          params: {
+            key: apiKey,
+            page: options.page,
+            page_size: options.page_size,
+            ordering: options.ordering,
+          },
         })
         .then((res) => {
           games.value = res.data.results;
@@ -25,6 +32,8 @@ export const useGamesStore = defineStore("games", () => {
   }
 
   async function fetchNext(url: string) {
+    console.log("store fetch new");
+
     try {
       await axios.get<GamesDto>(url).then((res) => {
         games.value.push(...res.data.results);
