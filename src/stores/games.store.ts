@@ -1,13 +1,21 @@
-import { ref, computed, reactive } from "vue";
+import { ref, reactive } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import type { Game, GamesDto } from "@/types/game";
+import type {
+  Game,
+  GameDetails,
+  GamesDto,
+  GameStore,
+  GameStoresDto,
+} from "@/types/game";
 
 export const useGamesStore = defineStore("games", () => {
   const baseUrl = "https://api.rawg.io/api/games";
   const apiKey = "f85e670587de45ccbf0587ede7b4ac8a";
   const games = ref<Game[]>([]);
   const nextPage = ref("");
+  const whereToBuy = ref<GameStore[]>([]);
+  const choosenGame = ref<GameDetails>({} as GameDetails);
 
   async function fetchGames(
     options = { page: 1, page_size: 36, ordering: "-added" }
@@ -44,5 +52,37 @@ export const useGamesStore = defineStore("games", () => {
     }
   }
 
-  return { games, nextPage, fetchGames, fetchNext };
+  async function fetchGame(slug: string) {
+    try {
+      await axios
+        .get<GameDetails>(baseUrl + "/" + slug, { params: { key: apiKey } })
+        .then((res) => {
+          choosenGame.value = res.data;
+        });
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
+  async function fetchWhereToBuy(slug: string) {
+    console.log(`fetching game stores by url: games/${slug}`);
+    try {
+      await axios.get<GameStoresDto>(baseUrl + slug + "/stores").then((res) => {
+        whereToBuy.value = res.data.results;
+      });
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
+  return {
+    games,
+    nextPage,
+    whereToBuy,
+    choosenGame,
+    fetchGames,
+    fetchNext,
+    fetchGame,
+    fetchWhereToBuy,
+  };
 });

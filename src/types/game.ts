@@ -36,3 +36,33 @@ export interface Game {
   metacritic: number;
   platforms: PlatformInfo[];
 }
+
+export interface GameDetails {
+  id: number;
+  slug: string;
+  name: string;
+  description: string;
+  esrb_rating: {
+    id: number;
+    slug: string;
+    name: string;
+  };
+  released: string;
+  tba: boolean;
+  background_image: string;
+  metacritic: number;
+  metacritic_url: string;
+  platforms: PlatformInfo[];
+}
+
+export interface GameStore {
+  id: number;
+  game_id: number;
+  store_id: number;
+  url: string;
+}
+
+export interface GameStoresDto {
+  count: number;
+  results: GameStore[];
+}

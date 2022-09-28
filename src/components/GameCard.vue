@@ -12,7 +12,7 @@ interface Props {
 const props = defineProps<Props>();
 </script>
 <template>
-  <RouterLink to="/games123">
+  <RouterLink :to="'games/' + props.slug">
     <div
       class="max-w-md h-full md:max-w-sm rounded-xl bg-neutral-800 overflow-hidden"
     >

@@ -14,7 +14,7 @@ const next = computed(() => {
   return store.nextPage;
 });
 
-function onOrderByChange() {
+function onChangeOrderBy() {
   store.fetchGames({ page: 1, page_size: 36, ordering: orderBy.value });
 }
 
@@ -37,7 +37,7 @@ onUpdated(() => {
     <div class="flex gap-3">
       <select
         v-model="orderBy"
-        @change="onOrderByChange"
+        @change="onChangeOrderBy"
         class="border w-fit mb-6 text-sm rounded-lg block p-2.5 bg-neutral-700 border-neutral-600 placeholder-neutral-400 text-white"
       >
         <option value="-added" selected>Order by</option>
@@ -48,7 +48,7 @@ onUpdated(() => {
       </select>
     </div>
 
-    <div class="grid md:grid-cols-3 xl:grid-cols-4 gap-3 justify-center">
+    <div class="grid md:grid-cols-3 xl:grid-cols-4 gap-8 justify-center">
       <GameCard
         v-for="game in games"
         :key="game.id"
